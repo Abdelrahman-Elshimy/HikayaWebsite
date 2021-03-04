@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Hikaya.DAL.Story>
+@using Hikaya.Helpers;
+@using Hikaya.DAL;
+@{
+    ViewBag.Title = "Stories";
+}
+
+<div class="jumbotron">
+    <h1>Story</h1>
+    <p class="lead">Read A lot of Stories.</p>
+    <p><a href="/Story/Create" class="btn btn-primary btn-lg">Add New Story</a></p>
+</div>
+
+<div class="story-list-wrapper row">
+    @foreach (Story story in Model)
+    {
+    <div class="col-md-6">
+        <h2>@story.Title</h2>
+        <h4 class="tags">@story.Tags</h4>
+        <p class="writer-name">@UserHelper.GetUserName(story.UserId)</p>
+        @Html.ActionLink("Read More", "Details", "Story", new { id = story.Id }, new { @class = "btn btn-primary" })
+        @if (story.SavedStories != null && story.SavedStories.Where(p => p.UserId == UserHelper.GetCurrentUser()).ToList().Count() > 0)
+        {
+            @Html.ActionLink("Delete Saved Story", "DeleteSavedStory", "Story", new { id = story.SavedStories.
+           Where(p => p.UserId == UserHelper.GetCurrentUser()).First().Id}, new { @class = "btn btn-primary" })
+        }
+        else
+        {
+            @Html.ActionLink("Save For Later", "SavedStory", "Story", new { id = story.Id }, new { @class = "btn btn-primary" })
+        }
+
+    </div>
+    }
+
+</div>

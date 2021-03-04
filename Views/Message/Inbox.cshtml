@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Hikaya.DAL.FeedBack>
+@using Hikaya.DAL;
+@using Hikaya.Helpers;
+@{  
+    ViewBag.Title = "Messages";
+}
+<h2>@ViewBag.Title</h2>
+@foreach (var item in Model) {
+
+<div class="message-item">
+    <p class="message-sender">
+        @UserHelper.GetUserName(item.UserId)
+    </p>
+    <p>
+        @item.Text
+    </p>
+    <p class="message-date">
+        @item.Date
+    </p>
+
+</div>
+}
+

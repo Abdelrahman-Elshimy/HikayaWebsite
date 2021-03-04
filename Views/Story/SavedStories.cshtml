@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Hikaya.DAL.SavedStory>
+@using Hikaya.Helpers;
+@using Hikaya.DAL;
+@{
+    ViewBag.Title = "Saved Stories";
+}
+
+<div class="saved-story-list-wrapper row">
+    @foreach (SavedStory story in Model)
+    {
+        <div class="col-md-6">
+            <h2>@story.Story.Title</h2>
+            <h4 class="tags">@story.Story.Tags</h4>
+            <p class="writer-name">@UserHelper.GetUserName(story.UserId)</p>
+            @Html.ActionLink("Read More", "Details", "Story", new { id = story.Story.Id }, new { @class = "btn btn-primary" })
+            
+
+        </div>
+    }
+
+</div>

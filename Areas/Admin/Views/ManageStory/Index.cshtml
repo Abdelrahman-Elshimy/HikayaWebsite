@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Hikaya.DAL.Story>
+@using Hikaya.Helpers;
+@{
+
+    ViewBag.Title = "Manage Stories";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+
+        <th>
+            Writer Name
+        </th>
+        <th>
+            Post Date
+        </th>
+        <th>
+            Operations
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @UserHelper.GetUserName(item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostDate)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            </td>
+        </tr>
+    }
+
+</table>
