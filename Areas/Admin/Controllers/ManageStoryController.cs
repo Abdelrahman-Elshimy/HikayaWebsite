@@ -19,7 +19,7 @@ namespace Hikaya.Areas.Admin.Controllers
             this.savedStoryReposo = reposo1;
         }
 
-        [Authorize]
+        [Authorize(Roles"Admin")]
         // GET: Admin/ManageStory
         public ActionResult Index()
         {
@@ -29,13 +29,13 @@ namespace Hikaya.Areas.Admin.Controllers
                 .ToList();
             return View(stories);
         }
-        [Authorize]
+        [Authorize(Roles"Admin")]
         public ActionResult Details(int id)
         {
             Story story = storyReposo.GetStoryById(id);
             return View(story);
         }
-        [Authorize]
+        [Authorize(Roles"Admin")]
         public ActionResult Publish(int id)
         {
             Story story = storyReposo.GetStoryById(id);
